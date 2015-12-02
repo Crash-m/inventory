@@ -74,7 +74,8 @@
 				<td align="right" width="5%"><%= number_to_currency(material.price.to_f) %></td>
 				<td align="center" width="5%"><%= material.in_stock.to_i %></td>
 				<td align="center" width="15%"><%= material.vendor %></td>
-				<% if current_user.admin || current_user.poweruser %><td align="right" width="4%"><%= number_to_currency(material.total.to_f) %></td><% end %>
+				<!-- <% if current_user.admin || current_user.poweruser %><td align="right" width="4%"><%= number_to_currency(material.total.to_f) %></td><% end %> -->
+				<% if current_user.admin || current_user.poweruser %><td align="right" width="4%"><%= number_to_currency(material.in_stock.to_f*material.price.to_f) %></td><% end %>
 				<td width="2%"><%= link_to 'Show', material_path(material) %></td>
 				<% if current_user.admin || current_user.poweruser %><td><%= link_to 'Edit', edit_material_path(material) %></td><% end %>
 				<% if current_user.admin %><td width="2%"><%= link_to 'Delete', material_path(material),

@@ -26,7 +26,7 @@
 	<th>Price</th>
 	<th>In Stock</th>
 	<th>Vendor</th>
-	<th>Total</th>
+	<!-- <th>Total</th> removed from table as editable field value still exists in database -->
 	<th>Markup</th>
   </tr>
   <tr>
@@ -40,7 +40,7 @@
 	<td><%= f.text_field :price, :size=>"10" %></td>
 	<td><%= f.text_field :in_stock, :size=>"10" %></td>
 	<td><%= f.text_field :vendor, :size=>"10" %></td>
-	<td><%= f.text_field :total, :size=>"10" %></td>
+	<!-- <td><%= f.text_field :total, :size=>"10" %></td> -->
 	<td><%= f.text_field :markup, :size=>"10" %></td>
   </tr>
  </table>
@@ -49,8 +49,8 @@
  <div class="stack col-md-12 l-adjust">
 		<br>
   		<%= f.submit %>
-
-
+
+
   	</div>
 <% end %>
 
