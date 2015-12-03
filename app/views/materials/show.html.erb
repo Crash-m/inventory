@@ -37,7 +37,7 @@
 				<td width="5%" align="center"><%= @material.in_stock.to_i %></td>
 				<td width="5%" align="center"><%= @material.vendor %></td>
 				<td width="3%" align="center"><%= number_to_currency(@material.in_stock.to_f*@material.price.to_f) %></td>
-				<td width="2%" align="center"><%= number_to_currency(@material.price.to_f*0.15) %></td>
+				<td width="2%" align="center"><%= number_to_currency(@material.price.to_f*0.15+@material.price.to_f) %></td>
 		</tr>
 		</table>
 		<br>

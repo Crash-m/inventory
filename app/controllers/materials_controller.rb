@@ -2,7 +2,7 @@ class MaterialsController < ApplicationController
 	helper_method :sort_column, :sort_direction
 	before_filter :authorize, only: [:import, :new]
 	before_filter :authorize_poweruser, only: [:edit, :update, :create]
-	before_filter :authorize_admin, only: [:destroy]
+	before_filter :authorize_admin, only: [:destroy, :status]
 	
 	def index
     @materials = Material.text_search(params[:query]).order(sort_column + " " + sort_direction).page(params[:page]).per(25)
@@ -23,6 +23,11 @@ class MaterialsController < ApplicationController
     redirect_to materials_path, notice: "Materials imported."
 	end
 	
+	#def status
+	#Material.status(params[:total])
+	#render :file => "/app/views/materials/status.html.erb"
+	
+	#end
 	
 	def new
 		@material = Material.new
@@ -62,7 +67,7 @@ class MaterialsController < ApplicationController
 	end
 	
 	private
-	
+	  	  
 	  def undo_link
 	    view_context.link_to("undo", revert_version_path(@material.versions.where(nil).last), :method => :post)
 	  end
