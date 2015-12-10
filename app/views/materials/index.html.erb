@@ -57,9 +57,10 @@
  				<th><%= sortable "price" %></th>
  				<th><%= sortable "in_stock", "Stock" %></th>
  				<th><%= sortable "vendor" %></th>
- 				<% if current_user.admin || current_user.poweruser %><th><%= sortable "total" %></th><% end %>
+ 				<th><%= sortable "total" %></th>
  				<th><%= sortable "Markup" %></th>
-				<% if current_user.admin || current_user.poweruser %><th></th><% end %>
+				<th></th>
+				<!-- <% if current_user.admin || current_user.poweruser %><th></th><% end %> -->
  				<% if current_user.admin || current_user.poweruser %><th></th><% end %>
  				<% if current_user.admin %><th></th><% end %>
  			</tr>
@@ -75,11 +76,12 @@
 				<td align="right" width="5%"><%= number_to_currency(material.price.to_f) %></td>
 				<td align="center" width="5%"><%= material.in_stock.to_i %></td>
 				<td align="center" width="9%"><%= material.vendor %></td>
-				<!-- <% if current_user.admin || current_user.poweruser %><td align="right" width="4%"><%= number_to_currency(material.total.to_f) %></td><% end %> -->
+				<!-- <% if current_user.admin || current_user.poweruser %><td align="right" width="4%"><%= number_to_currency(material.total.to_f) %></td><% end %> commented out per request to calculate live the value of quantity and price-->
 				
-				<% if current_user.admin || current_user.poweruser %><td align="right" width="4%"><%= number_to_currency(material.in_stock.to_f*material.price.to_f) %></td><% end %>
+				<td align="right" width="4%"><%= number_to_currency(material.in_stock.to_f*material.price.to_f) %></td>
+				<td align="center" width="6%"><%= number_to_currency(material.price.to_f*0.15+material.price.to_f) %></td>
 				
-				<% if current_user.admin || current_user.poweruser %><td align="center" width="6%"><%= number_to_currency(material.price.to_f*0.15+material.price.to_f) %></td><% end %>
+				<!-- The show, edit and destroy functions rendered only to auth groups -->
 				<td width="2%"><%= link_to 'Show', material_path(material) %></td>
 				<% if current_user.admin || current_user.poweruser %><td><%= link_to 'Edit', edit_material_path(material) %></td><% end %>
 				<% if current_user.admin %><td width="2%"><%= link_to 'Delete', material_path(material),
