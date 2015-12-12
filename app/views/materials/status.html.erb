@@ -54,12 +54,12 @@
 				<td><%= material.category %></td>
 				<td><%= material.product %></td>
 				<% if !material.total %>
-					<td bgcolor="#ebebe0">N/A<%= material.total %></td>
+					<td bgcolor="#ebebe0">N/A</td>
 				<% else %>
-					<td><%= number_to_currency(material.total) %></td>
+					<td><%= number_to_currency(material.total.to_f) %></td>
 				<% end %>
 				<td><%= number_to_currency(material.in_stock.to_f*material.price.to_f) %>
-				<% material.total = (material.in_stock.to_f*material.price.to_f) %>
+				<% material.total = number_to_currency(material.in_stock.to_f*material.price.to_f) %>
 				<td><%= f.text_field :total, :size=>"10%" %></td>
 				<td><%= f.submit %></td>
 			</tr>
