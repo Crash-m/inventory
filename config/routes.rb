@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
-  
+  get 'status', to: 'materials#status', as: 'status'
   
   resources :users
   resources :sessions
@@ -15,5 +15,5 @@ Rails.application.routes.draw do
 	  collection { post :import }
 	end
 	root :to => 'materials#index'
-
+	
 end

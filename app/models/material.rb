@@ -44,7 +44,7 @@ class Material < ActiveRecord::Base
        end
     end
   end
-  
+ 
   
   def self.import(file)
     spreadsheet = open_spreadsheet(file)
@@ -56,7 +56,7 @@ class Material < ActiveRecord::Base
       material.save!
     end
   end
-  
+ 
   def self.open_spreadsheet(file)
     case File.extname(file.original_filename)
     when ".csv" then Roo::Csv.new(file.path, nil, :ignore)

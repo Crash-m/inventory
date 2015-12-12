@@ -1,15 +1,75 @@
 <%= render 'layouts/header' %>
 <div class="jumbotron">
-	<div class="container">
-		<h1>Inventory Status</h1>
-	</div>
+			<div class="container">
+				<div>
+					<h1 align="center" >Material Status</h1>
+				</div>
+				<br>
+				<br>
+			</div>
+	
+</div>
+<br>
+<br>
+<div class="col-md-offset-1 col-md-10" >
+ 	<table class="wikitable">
+		<tr>
+			
+			<th width="400em" height="25px"></th>
+			<th width="100em"></th>
+			<th width="100em"></th>
+			<th width="300em"></th>
+			
+		</tr>
+		<tr>
+			<td>Total Value</td>
+			<td></td>
+			<td></td>
+			<td align="right"><%= number_to_currency(@materials.sum(:total)) %>
+				
+			
+			</td>
+		</tr>
+
+	</table>
 </div>
 
-<table>
+<div class="col-md-offset-1 col-md-10" >
+<br> Data Discrepencies  - When there are data discrepencies below. Please update materials before relying on above inventory total value.</br>
+  
+<table class="wikitable">
+
 	<tr>
-		<td></td>
-		<td></td>
-		<td></td>
+		<th width="125em">Category</th>
+		<th width="275em">Product</th>
+		<th width="100em">Old total</th>
+		<th width="100em">Corrected Total</th>
+		<th width="150em">New Total</th>
+		<th width="150em"></th>
 	</tr>
-</table>
-<% end %>
+	<% @materials.each do |material| %>
+		<% if number_to_currency(material.total.to_f) != number_to_currency(material.in_stock.to_f*material.price.to_f) %>
+			<%= form_for material do |f| %>
+			<tr>
+				<td><%= material.category %></td>
+				<td><%= material.product %></td>
+				<% if !material.total %>
+					<td bgcolor="#ebebe0">N/A<%= material.total %></td>
+				<% else %>
+					<td><%= material.total %></td>
+				<% end %>
+				<td><%= number_to_currency(material.in_stock.to_f*material.price.to_f) %>
+				<% material.total = number_to_currency(material.in_stock.to_f*material.price.to_f) %>
+				<td><%= f.text_field :total, :size=>"10%" %></td>
+				<td><%= f.submit %></td>
+			</tr>
+			<% end %>
+		<% end %>
+	<% end %>
+	
+	</table>
+</div>
+<div>
+<br>
+<br>
+</div>

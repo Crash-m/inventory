@@ -48,7 +48,8 @@
 
 <div class="stacks col-md-offset-1 col-md-10">
 	<% if current_user.admin %><div><%= link_to 'Back to Edit', edit_material_path(@material) %></div><% end %>
-	<div><%= link_to 'Back to Search', root_path(:query) %></div>
+	<div><%= link_to 'Back to Main', root_path(:query) %></div>
+	<% if current_user.admin %><div><%= link_to 'Back to Status', status_path %></div><% end %>
 </div>
 
 

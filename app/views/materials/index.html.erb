@@ -20,7 +20,7 @@
 					</tr>
 					<% end %>
 					</table>
-	</div>
+			</div>
 	
 	<div class='container'><%= render 'layouts/alert_message' %>
 	</div>
@@ -30,7 +30,7 @@
 	
 		<% if current_user %>
 			<%	if current_user.admin || current_user.poweruser %>
-				<pass class="col-md-2"><%= link_to 'Add New Material', new_material_path %>  ----  STATUS</pass>
+				<pass class="col-md-2"><%= link_to 'Add New Material   ', new_material_path %><%= link_to '   Status', status_path %></pass>
 			<% else %>
 				<pass class="col-md-2"></pass>
 			<% end %>
@@ -44,7 +44,7 @@
 		
 	</div>
 
- <div class="col-md-offset-1 col-md-10">
+<div class="col-md-offset-1 col-md-10">
  	<table class="wikitable">
  			<tr>
  				<% if current_user.admin %><th><%= sortable "id" %></th><% end %>
@@ -60,8 +60,7 @@
  				<th><%= sortable "total" %></th>
  				<th><%= sortable "Markup" %></th>
 				<th></th>
-				<!-- <% if current_user.admin || current_user.poweruser %><th></th><% end %> -->
- 				<% if current_user.admin || current_user.poweruser %><th></th><% end %>
+				<% if current_user.admin || current_user.poweruser %><th></th><% end %>
  				<% if current_user.admin %><th></th><% end %>
  			</tr>
 			<% @materials.each do |material| %>

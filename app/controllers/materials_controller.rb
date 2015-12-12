@@ -23,12 +23,15 @@ class MaterialsController < ApplicationController
     redirect_to materials_path, notice: "Materials imported."
 	end
 	
-	#def status
+	def status
 	#Material.status(params[:total])
 	#render :file => "/app/views/materials/status.html.erb"
-	
-	#end
-	
+	@materials = Material.all
+	render 'status'
+		#if @materials.update(material_params)
+		#	redirect_to status_path, :notice => "Update applied to tables. #{undo_link}"
+		#end
+	end
 	def new
 		@material = Material.new
 	end
@@ -58,14 +61,13 @@ class MaterialsController < ApplicationController
 		  render 'edit'
 		end
 	end
-	
+
 	def destroy
 		@material = Material.find(params[:id])
 		@material.destroy
-		
 		redirect_to materials_path, :notice => "Successfully destroyed material. #{undo_link}"
 	end
-	
+
 	private
 	  	  
 	  def undo_link
