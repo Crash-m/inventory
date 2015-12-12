@@ -1,8 +1,8 @@
 class MaterialsController < ApplicationController
 	helper_method :sort_column, :sort_direction
 	before_filter :authorize, only: [:import, :new]
-	before_filter :authorize_poweruser, only: [:edit, :update, :create]
-	before_filter :authorize_admin, only: [:destroy, :status]
+	before_filter :authorize_poweruser, only: [:edit, :update, :create, :status]
+	before_filter :authorize_admin, only: [:destroy]
 	
 	def index
     @materials = Material.text_search(params[:query]).order(sort_column + " " + sort_direction).page(params[:page]).per(25)
