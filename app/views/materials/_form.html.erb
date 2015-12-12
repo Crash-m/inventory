@@ -26,7 +26,6 @@
 	<th>Price</th>
 	<th>In Stock</th>
 	<th>Vendor</th>
-	<th>Old Total</th>
 	<th>Total</th>
 	<th>Markup</th>
   </tr>
@@ -41,8 +40,6 @@
 	<td><%= f.text_field :price, :size=>"10" %></td>
 	<td><%= f.text_field :in_stock, :size=>"10" %></td>
 	<td><%= f.text_field :vendor, :size=>"10" %></td>
-	<td><%= number_to_currency(@material.total) %></td>
-	<% @material.total = number_to_currency(@material.in_stock.to_f*@material.price.to_f) %>
 	<td><%= f.text_field :total, :size=>"10" %></td>
 	<td><%= f.text_field :markup, :size=>"10" %></td>
   </tr>
