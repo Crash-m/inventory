@@ -48,7 +48,7 @@
 		<th width="150em"></th>
 	</tr>
 	<% @materials.each do |material| %>
-		<% if number_to_currency(material.total.to_f) != number_to_currency(material.in_stock.to_f*material.price.to_f) %>
+		<% if number_to_currency(material.total) != number_to_currency(material.in_stock.to_f*material.price.to_f) %>
 			<%= form_for material do |f| %>
 			<tr>
 				<td><%= material.category %></td>
