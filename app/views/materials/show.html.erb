@@ -27,7 +27,7 @@
 			<th>Markup(15%)</th>
 		</tr>
 		<tr>
-				<td width="2%"><%= @material.category %></td>
+				<td width="2%"><%= @material.id %></td>
 				<td width="5%"><%= @material.category %></td>
 				<% if !@material.subcategory.blank? || current_user.admin %><td width="5%"><%= @material.subcategory %></td><% end %>
 				<td width="5%"><%= @material.measurements %></td>
