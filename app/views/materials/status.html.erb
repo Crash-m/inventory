@@ -15,7 +15,7 @@
  	<table class="wikitable">
 		<tr>
 			
-			<th width="400em" height="25px"></th>
+			<th width="450em" height="25px"></th>
 			<th width="100em"></th>
 			<th width="100em"></th>
 			<th width="300em"></th>
@@ -40,6 +40,7 @@
 <table class="wikitable">
 
 	<tr>
+		<th width="50em">ID</th>
 		<th width="125em">Category</th>
 		<th width="275em">Product</th>
 		<th width="100em">Old total</th>
@@ -51,6 +52,7 @@
 		<% if number_with_precision(material.total, :precision => 2 || 0) != number_with_precision(material.in_stock.to_f*material.price.to_f, :precision => 2 || 0) %>
 			<%= form_for material do |f| %>
 			<tr>
+				<td><%= material.id %></td>
 				<td><%= material.category %></td>
 				<td><%= material.product %></td>
 				<% if !material.total %>
