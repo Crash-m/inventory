@@ -12,6 +12,7 @@
 		<br />
 		<table class="wikitable">
 		<tr>
+			<th>ID</th>
 			<th>Category</th>
 			<% if !@material.subcategory.blank? || current_user.admin %><th>Sub-Category</th><% end %>
 			<th>Measurements</th>
@@ -26,6 +27,7 @@
 			<th>Markup(15%)</th>
 		</tr>
 		<tr>
+				<td width="2%"><%= @material.category %></td>
 				<td width="5%"><%= @material.category %></td>
 				<% if !@material.subcategory.blank? || current_user.admin %><td width="5%"><%= @material.subcategory %></td><% end %>
 				<td width="5%"><%= @material.measurements %></td>
@@ -34,8 +36,8 @@
 				<td width="20%"><%= @material.product_description %></td>
 				<td width="3%" align="center"><%= @material.uom %></td>
 				<td width="5%" align="center"><%= number_to_currency(@material.price) %></td>
-				<td width="5%" align="center"><%= @material.in_stock.to_i %></td>
-				<td width="5%" align="center"><%= @material.vendor %></td>
+				<td width="4%" align="center"><%= @material.in_stock.to_i %></td>
+				<td width="4%" align="center"><%= @material.vendor %></td>
 				<td width="3%" align="center"><%= number_to_currency(@material.in_stock.to_f*@material.price.to_f) %></td>
 				<td width="2%" align="center"><%= number_to_currency(@material.price.to_f*0.15+@material.price.to_f) %></td>
 		</tr>
