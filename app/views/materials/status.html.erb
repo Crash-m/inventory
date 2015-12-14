@@ -48,7 +48,7 @@
 		<th width="150em"></th>
 	</tr>
 	<% @materials.each do |material| %>
-		<% if number_to_currency(material.total) != number_to_currency(material.in_stock.to_f*material.price.to_f) %>
+		<% if number_with_precision(material.total, :precision => 2 || 0) != number_with_precision(material.in_stock.to_f*material.price.to_f, :precision => 2 || 0) %>
 			<%= form_for material do |f| %>
 			<tr>
 				<td><%= material.category %></td>
@@ -59,8 +59,8 @@
 					<td><%= number_to_currency(material.total.to_f) %></td>
 				<% end %>
 				<td><%= number_to_currency(material.in_stock.to_f*material.price.to_f) %>
-				<% material.total = number_to_currency(material.in_stock.to_f*material.price.to_f) %>
-				<td><%= f.text_field :total, :size=>"10%" %></td>
+				<% material.total = material.in_stock.to_f*material.price.to_f %>
+				<td><%= f.text_field :total, :value => number_with_precision(material.total, :precision => 2 || 0), :size=>"10%" %></td>
 				<td><%= f.submit %></td>
 			</tr>
 			<% end %>
