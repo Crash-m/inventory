@@ -1,9 +1,35 @@
+	<% a = Array.new %>
+	<% i = 0 %>
+	<% h = {} %>
+	<% @materials.each do |material| %>
+		<% if number_with_precision(material.total, :precision => 2 || 0) != number_with_precision(material.in_stock.to_f*material.price.to_f, :precision => 2 || 0) %>
+		<% entry = [] %>
+		<% entry.push(material.id) %>
+		<% entry.push(material.category) %>
+		<% entry.push(material.subcategory) %>
+		<% entry.push(material.measurements) %>
+		<% entry.push(material.product) %>
+		<% entry.push(material.product_number) %>
+		<% entry.push(material.product_description) %>
+		<% entry.push(material.uom) %>
+		<% entry.push(material.price) %>
+		<% entry.push(material.in_stock) %>
+		<% entry.push(material.vendor) %>
+		<% entry.push(material.total) %>
+		<% entry.push(material.markup) %>
+		<% a.push(entry)%>
+		<% i = i+1 %>
+		<% end %>
+	<% end %>
 <%= render 'layouts/header' %>
 <div class="jumbotron">
 			<div class="container">
 				<div>
 					<h1 align="center" >Material Status</h1>
 				</div>
+					<div class='container'>
+					<%= render 'layouts/alert_message' %>
+					</div>
 				<br>
 				<br>
 			</div>
@@ -15,7 +41,7 @@
  	<table class="wikitable">
 		<tr>
 			
-			<th width="975em" height="25px"></th>
+			<th width="1175em" height="25px"></th>
 			<th width="300em"></th>
 			
 		</tr>
@@ -31,8 +57,9 @@
 </div>
 
 <div class="col-md-offset-1 col-md-10" >
-<br> Data Discrepencies  - When there are data discrepencies below. Please update materials before relying on above inventory total value.</br>
-  
+<br> Data Discrepencies "<%= a.length %>" - When there are data discrepencies below. Please accept updates to totals before relying on above valuation.</br>
+<br></br>
+
 <table class="wikitable">
 
 	<tr>
@@ -40,14 +67,18 @@
 		<th width="125em">Category</th>
 		<th width="550em">Product</th>
 		<th width="150em">Present Total</th>
-		<th width="100em">Calculated Total (price x quantity)</th>
-		<th width="150em">New Total</th>
+		<th width="300em">Calculated Total (price x quantity)</th>
 		<th width="150em"></th>
+		<th width="150em"></th>
+		
 	</tr>
+
+	
 	<% @materials.each do |material| %>
 		<% if number_with_precision(material.total, :precision => 2 || 0) != number_with_precision(material.in_stock.to_f*material.price.to_f, :precision => 2 || 0) %>
 			<%= form_for material do |f| %>
 			<tr>
+			
 				<td><%= material.id %></td>
 				<td align="right"><%= material.category %></td>
 				<td align="right"><%= link_to material.product, material_path(material) %></td>
@@ -60,14 +91,18 @@
 				<% material.total = material.in_stock.to_f*material.price.to_f %>
 				<td align="center">  $<%= f.text_field :total, :value => number_with_precision(material.total, :precision => 2 || 0), :size=>"8%", :text=>"right"%></td>
 				<td align="center"><%= f.submit :value=>"Apply New Total" %></td>
+				
 			</tr>
 			<% end %>
 		<% end %>
 	<% end %>
+	
+	<br>
 	
 	</table>
 </div>
 <div>
 <br>
 <br>
+
 </div>

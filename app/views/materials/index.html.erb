@@ -30,7 +30,7 @@
 	
 		<% if current_user %>
 			<%	if current_user.admin || current_user.poweruser %>
-				<pass class="col-md-2"><%= link_to 'Add New Material   ', new_material_path %><%= link_to '   Status', status_path %></pass>
+				<pass class="col-md-2"><%= link_to 'Add New Material   ', new_material_path %><%= link_to '       Status', status_path %><%= link_to '       History', status_version_path %></pass>
 			<% else %>
 				<pass class="col-md-2"></pass>
 			<% end %>

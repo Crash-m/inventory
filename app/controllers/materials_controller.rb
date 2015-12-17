@@ -4,6 +4,7 @@ class MaterialsController < ApplicationController
 	before_filter :authorize_poweruser, only: [:edit, :update, :create, :status]
 	before_filter :authorize_admin, only: [:destroy]
 	
+	
 	def index
     @materials = Material.text_search(params[:query]).order(sort_column + " " + sort_direction).page(params[:page]).per(25)
 		respond_to do |format|
@@ -13,35 +14,15 @@ class MaterialsController < ApplicationController
 		end
     
 	end
-	
 	def edit
 		@material = Material.find(params[:id])
-	end
-	
-	def import
-    Material.import(params[:file])
-    redirect_to materials_path, notice: "Materials imported."
-	end
-	
-	def status
-	#Material.status(params[:total])
-	#render :file => "/app/views/materials/status.html.erb"
-	@materials = Material.all
-	render 'status'
-		#if @materials.update(material_params)
-		#	redirect_to status_path, :notice => "Update applied to tables. #{undo_link}"
-		#end
 	end
 	def new
 		@material = Material.new
 	end
-	
 	def show
 		@material = Material.find(params[:id])
-		
-		
 	end
-	
 	def create
 		@material = Material.new(material_params)
 		
@@ -51,7 +32,6 @@ class MaterialsController < ApplicationController
 			render 'new'
 		end
 	end
-
 	def update
 		@material = Material.find(params[:id])
 		
@@ -61,29 +41,51 @@ class MaterialsController < ApplicationController
 		  render 'edit'
 		end
 	end
-
 	def destroy
 		@material = Material.find(params[:id])
 		@material.destroy
 		redirect_to materials_path, :notice => "Successfully destroyed material. #{undo_link}"
 	end
 
+	def status
+	@materials = Material.all
+	render 'status'
+	
+	end
+	
+	def import
+    Material.import(params[:file])
+    redirect_to materials_path, notice: "Materials imported."
+	end
+	
+	#def edit_status_multiple
+	#	stock = params[:in_stock]
+	#	price = params[:price]
+	#	total = (stock*price)
+	#	Material.update_all({total: total}, {id: params[:material_ids]})
+	#	redirect to status_path
+	#end
+	
 	private
 	  	  
-	  def undo_link
-	    view_context.link_to("undo", revert_version_path(@material.versions.where(nil).last), :method => :post)
-	  end
+		def undo_link
+			view_context.link_to("undo", revert_version_path(@material.versions.where(nil).last), :method => :post)
+		end
 	
 		def material_params
 			params.require(:material).permit(:category, :subcategory, :measurements, :product, :product_number, :product_description, :uom, :price, :in_stock, :vendor, :total, :markup)
 		end
 		
-	  def sort_column
-	    Material.column_names.include?(params[:sort]) ? params[:sort] : "id"
-	  end
+		#def status_params
+		#	params.require(:status).permit(:category, :subcategory, :measurements, :product, :product_number, :product_description, :uom, :price, :in_stock, :vendor, :total, :markup)
+		#end
+		
+		def sort_column
+		Material.column_names.include?(params[:sort]) ? params[:sort] : "id"
+		end
 	  
-	  def sort_direction
-	    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
-	  end
+		def sort_direction
+			%w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+		end
 end
 

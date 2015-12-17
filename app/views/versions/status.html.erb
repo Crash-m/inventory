@@ -1,0 +1,48 @@
+<%= render 'layouts/header' %>
+<div class="jumbotron">
+			<div class="container">
+				<div>
+					<h1 align="center" >History</h1>
+				</div>
+					<div class='container'>
+					<%= render 'layouts/alert_message' %>
+					</div>
+				<br>
+				<br>
+			</div>
+	
+</div>
+
+<div class="col-md-offset-1 col-md-10" >
+<table class="wikitable">
+
+	<tr>
+		<th width="50em">Item Type</th>
+		<th width="50em">Item ID</th>
+		<th width="50em">Event</th>
+		<th width="50em">User</th>
+		<th width="50em">Object</th>
+		<th width="50em">Time stamp</th>
+	</tr>
+
+	
+	<% for version in @version %>
+		<tr>
+				<td><%= version.item_type%></td>
+				<td><%= version.item_id %></td>
+				<td><%=version.event %></td>
+				<td><%=version.whodunnit %></td>
+				<td><%=version.object %></td>
+				<td><%=version.created_at %></td>
+		</tr>
+	<% end %>
+	
+	<br>
+	
+	</table>
+</div>
+<div>
+<br>
+<br>
+
+</div>
